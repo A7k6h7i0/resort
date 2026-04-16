@@ -62,12 +62,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const meta = pageMeta[pagePath] || pageMeta["/"];
 
+  const preloadHeroBackground = (url) => {
+    if (!url) return;
+    if (document.querySelector(`link[rel="preload"][as="image"][href="${url}"]`)) return;
+
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = url;
+    document.head.appendChild(link);
+  };
+
+  preloadHeroBackground(meta.image);
+
   const style = document.createElement("style");
   style.textContent = `
     .sp-animate-ready .sp-reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s ease;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease;
       will-change: opacity, transform;
     }
 
@@ -94,8 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     .sp-load-in {
       opacity: 0;
-      transform: translateY(18px);
-      animation: spFadeUp 0.8s ease forwards;
+      transform: translateY(14px);
+      animation: spFadeUp 0.55s ease forwards;
     }
 
     @keyframes spFadeUp {
@@ -224,10 +237,10 @@ document.addEventListener("DOMContentLoaded", () => {
       heroTargets.forEach((node, index) => {
         if (node instanceof HTMLElement) {
           node.classList.add("sp-load-in");
-          if (index === 0) node.style.animationDelay = "0.08s";
-          if (index === 1) node.style.animationDelay = "0.18s";
-          if (index === 2) node.style.animationDelay = "0.28s";
-          if (index >= 3) node.style.animationDelay = `${0.2 + index * 0.08}s`;
+          if (index === 0) node.style.animationDelay = "0.03s";
+          if (index === 1) node.style.animationDelay = "0.08s";
+          if (index === 2) node.style.animationDelay = "0.13s";
+          if (index >= 3) node.style.animationDelay = `${0.12 + index * 0.05}s`;
         }
       });
 
@@ -257,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
     staggerTargets.forEach((el, index) => {
       if (el instanceof HTMLElement) {
         el.classList.add("sp-reveal", "sp-scale");
-        el.style.transitionDelay = `${Math.min(index * 0.06, 0.42)}s`;
+        el.style.transitionDelay = `${Math.min(index * 0.04, 0.24)}s`;
       }
     });
 
@@ -270,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -14% 0px" }
     );
 
     animateTargets.forEach((el) => observer.observe(el));
