@@ -166,6 +166,49 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", () => setMenuState(false));
   });
 
+  if (pagePath === "/experiences") {
+    const filterButtons = Array.from(document.querySelectorAll("[data-experience-filter]"));
+    const cards = Array.from(document.querySelectorAll("[data-experience-card]"));
+    const emptyState = document.querySelector("[data-experience-empty-state]");
+
+    const setActiveFilter = (category) => {
+      let visibleCount = 0;
+
+      filterButtons.forEach((button) => {
+        const isActive = button.getAttribute("data-experience-filter") === category;
+
+        button.setAttribute("aria-pressed", String(isActive));
+        button.classList.toggle("bg-forest-dark", isActive);
+        button.classList.toggle("text-white", isActive);
+        button.classList.toggle("shadow-lg", isActive);
+        button.classList.toggle("scale-105", isActive);
+        button.classList.toggle("bg-cream", !isActive);
+        button.classList.toggle("text-forest-dark", !isActive);
+        button.classList.toggle("hover:bg-sage/20", !isActive);
+      });
+
+      cards.forEach((card) => {
+        const cardCategory = card.getAttribute("data-experience-card");
+        const shouldShow = category === "all" || cardCategory === category;
+
+        card.classList.toggle("hidden", !shouldShow);
+        if (shouldShow) visibleCount += 1;
+      });
+
+      if (emptyState instanceof HTMLElement) {
+        emptyState.classList.toggle("hidden", visibleCount > 0);
+      }
+    };
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setActiveFilter(button.getAttribute("data-experience-filter") || "all");
+      });
+    });
+
+    setActiveFilter("all");
+  }
+
   if (!reducedMotion) {
     const heroSection = document.querySelector("main > section");
     if (heroSection) {
