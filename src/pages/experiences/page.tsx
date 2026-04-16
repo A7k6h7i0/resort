@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import SEO from '../../components/common/SEO';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
@@ -5,6 +6,8 @@ import Footer from '../../components/feature/Footer';
 import { motion } from 'framer-motion'; 
 
 export default function ExperiencesPage() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
   const experiences = [
     {
       id: 1,
@@ -74,6 +77,18 @@ export default function ExperiencesPage() {
       groupSize: '4-10 people'
     },
   ];
+
+  const categories = [
+    { id: 'all', name: 'All Experiences', icon: 'ri-compass-3-line' },
+    { id: 'water', name: 'Water Activities', icon: 'ri-water-flash-line' },
+    { id: 'nature', name: 'Nature & Wildlife', icon: 'ri-leaf-line' },
+    { id: 'adventure', name: 'Adventure', icon: 'ri-mountain-line' },
+    { id: 'culture', name: 'Cultural', icon: 'ri-community-line' }
+  ];
+
+  const filteredExperiences = selectedCategory === 'all'
+    ? experiences
+    : experiences.filter(exp => exp.category === selectedCategory);
 
   const getDifficultyColor = (difficulty: string) => {
     if (difficulty.includes('Easy')) return 'text-emerald-600';
@@ -162,20 +177,87 @@ export default function ExperiencesPage() {
       {/* Category Filter */}
       <section className="py-12 bg-white border-b border-sage/20">
         <div className="container mx-auto px-4">
-          <div className="flex justify-center">
-            <button
-              type="button"
-              aria-pressed="true"
-              className="flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 bg-forest-dark text-white shadow-lg scale-105"
-            >
-              <i className="ri-community-line text-xl"></i>
-              Cultural
-            </button>
+          <div className="flex flex-wrap justify-center gap-4">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                type="button"
+                aria-pressed={selectedCategory === category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  selectedCategory === category.id
+                    ? 'bg-forest-dark text-white shadow-lg scale-105'
+                    : 'bg-cream text-forest-dark hover:bg-sage/20'
+                }`}
+              >
+                <i className={`${category.icon} text-xl`}></i>
+                {category.name}
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Cultural Info */}
+      {/* Experiences Grid */}
+      {selectedCategory !== 'culture' ? (
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredExperiences.map((experience) => (
+              <div
+                key={experience.id}
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+              >
+                {/* Image */}
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={experience.image}
+                    alt={experience.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                    <span className={`text-sm font-semibold ${getDifficultyColor(experience.difficulty)}`}>
+                      {experience.difficulty}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="font-serif text-2xl font-bold text-forest-dark mb-3">
+                    {experience.title}
+                  </h3>
+                  <p className="text-charcoal/80 leading-relaxed mb-6">
+                    {experience.description}
+                  </p>
+
+                  {/* Details Grid */}
+                  <div className="space-y-3 text-sm">
+                    <div className="flex items-center gap-2 text-charcoal/70">
+                      <i className="ri-time-line text-gold text-lg"></i>
+                      <span className="font-medium">Duration</span>
+                      <span className="ml-auto">{experience.duration}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-charcoal/70">
+                      <i className="ri-sun-line text-gold text-lg"></i>
+                      <span className="font-medium">Best Time</span>
+                      <span className="ml-auto">{experience.bestTime}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-charcoal/70">
+                      <i className="ri-group-line text-gold text-lg"></i>
+                      <span className="font-medium">Group Size</span>
+                      <span className="ml-auto">{experience.groupSize}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      ) : (
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -190,6 +272,7 @@ export default function ExperiencesPage() {
           </div>
         </div>
       </section>
+      )}
       {/* <PolicySection /> */}
       <Footer />
     </div>

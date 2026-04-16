@@ -169,7 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (pagePath === "/experiences") {
     const filterButtons = Array.from(document.querySelectorAll("[data-experience-filter]"));
     const cards = Array.from(document.querySelectorAll("[data-experience-card]"));
-    const emptyState = document.querySelector("[data-experience-empty-state]");
+    const gridSection = document.querySelector("[data-experience-grid]");
+    const culturePanel = document.querySelector("[data-culture-panel]");
 
     const setActiveFilter = (category) => {
       let visibleCount = 0;
@@ -187,6 +188,14 @@ document.addEventListener("DOMContentLoaded", () => {
         button.classList.toggle("hover:bg-sage/20", !isActive);
       });
 
+      if (gridSection instanceof HTMLElement) {
+        gridSection.classList.toggle("hidden", category === "culture");
+      }
+
+      if (culturePanel instanceof HTMLElement) {
+        culturePanel.classList.toggle("hidden", category !== "culture");
+      }
+
       cards.forEach((card) => {
         const cardCategory = card.getAttribute("data-experience-card");
         const shouldShow = category === "all" || cardCategory === category;
@@ -194,10 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
         card.classList.toggle("hidden", !shouldShow);
         if (shouldShow) visibleCount += 1;
       });
-
-      if (emptyState instanceof HTMLElement) {
-        emptyState.classList.toggle("hidden", visibleCount > 0);
-      }
     };
 
     filterButtons.forEach((button) => {
