@@ -12,20 +12,20 @@ const RoomTariff = () => {
   const tariffData = [
     {
       roomType: 'Double Deluxe Room (AC)',
-      regularPrice: '₹6,990',
-      peakPrice: '₹7,990',
+      regularPrice: 'â‚¹6,990',
+      peakPrice: 'â‚¹7,990',
       icon: 'ri-temp-cold-line',
     },
     {
       roomType: 'Double Deluxe Room (Fan Cooled)',
-      regularPrice: '₹5,990',
-      peakPrice: '₹6,990',
+      regularPrice: 'â‚¹5,990',
+      peakPrice: 'â‚¹6,990',
       icon: 'ri-windy-line',
     },
     {
       roomType: 'Extra Adult with Mattress',
-      regularPrice: '₹1,990',
-      peakPrice: '₹2,100',
+      regularPrice: 'â‚¹1,990',
+      peakPrice: 'â‚¹2,100',
       icon: 'ri-user-add-line',
     },
     {
@@ -45,69 +45,13 @@ const RoomTariff = () => {
   return (
     <section ref={ref} className="py-24 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-block px-4 py-2 rounded-full bg-gold/20 text-gold text-sm tracking-widest uppercase font-sans mb-6 whitespace-nowrap">
-            Room Tariff
-          </div>
-          
-          <h2 className="font-serif font-bold text-4xl md:text-5xl text-forest-dark mb-6 leading-tight">
-            Transparent Pricing for Your Stay
-          </h2>
-          
-          <p className="text-olive text-lg max-w-3xl mx-auto leading-relaxed">
-            16 well-furnished deluxe double rooms, cottage-type with independent sit-outs in a village setting 
-            located in the midst of evergreen forest. Air conditioners provided in all rooms for your comfort.
-          </p>
-        </motion.div>
-
-        {/* Season Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 max-w-4xl mx-auto"
-        >
-          <div className="bg-sand-light/30 rounded-2xl p-6 border-2 border-forest/10">
-            <div className="flex items-center space-x-3 mb-3">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-forest/10">
-                <i className="ri-calendar-line text-forest text-xl"></i>
-              </div>
-              <h3 className="font-sans font-semibold text-forest-dark text-lg">Regular Season</h3>
-            </div>
-            <p className="text-olive text-sm">
-              15th September 2026 – 31st May 2027<br />
-              <span className="text-xs">(Excluding peak season dates)</span>
-            </p>
-          </div>
-
-          <div className="bg-gold/10 rounded-2xl p-6 border-2 border-gold/30">
-            <div className="flex items-center space-x-3 mb-3">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gold/20">
-                <i className="ri-star-line text-gold text-xl"></i>
-              </div>
-              <h3 className="font-sans font-semibold text-forest-dark text-lg">Peak Season</h3>
-            </div>
-            <p className="text-olive text-sm">
-              16th December 2026 – 5th January 2027<br />
-              <span className="text-xs font-medium text-gold">(Minimum 2 nights stay required)</span>
-            </p>
-          </div>
-        </motion.div>
-
         {/* Tariff Table */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8 }}
           className="bg-white rounded-3xl shadow-xl overflow-hidden border border-sand-light/30"
         >
-          {/* Table Header */}
           <div className="bg-forest text-white px-8 py-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="font-sans font-semibold text-base tracking-wider uppercase">Room Type</div>
@@ -116,14 +60,13 @@ const RoomTariff = () => {
             </div>
           </div>
 
-          {/* Table Body */}
           <div className="divide-y divide-sand-light/30">
             {tariffData.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : -20 }}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
                 className="px-8 py-6 hover:bg-sand-light/20 transition-colors duration-300"
               >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
@@ -146,7 +89,6 @@ const RoomTariff = () => {
             ))}
           </div>
 
-          {/* Footer Note */}
           <div className="bg-sand-light/30 px-8 py-6">
             <div className="flex items-start space-x-3">
               <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gold/20 mt-1">
@@ -155,11 +97,66 @@ const RoomTariff = () => {
               <div className="flex-1">
                 <p className="text-olive text-sm leading-relaxed">
                   <strong className="text-forest-dark">Important:</strong> All rates are per night and per Room.
-                  Peak season bookings require a minimum stay of 2 nights. Prices are subject to change without prior notice. 
+                  Peak season bookings require a minimum stay of 2 nights. Prices are subject to change without prior notice.
                   Please contact us for group bookings and special packages.
                 </p>
               </div>
             </div>
+          </div>
+        </motion.div>
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center mt-16 mb-16"
+        >
+          <div className="inline-block px-4 py-2 rounded-full bg-gold/20 text-gold text-sm tracking-widest uppercase font-sans mb-6 whitespace-nowrap">
+            Room Tariff
+          </div>
+
+          <h2 className="font-serif font-bold text-4xl md:text-5xl text-forest-dark mb-6 leading-tight">
+            Transparent Pricing for Your Stay
+          </h2>
+
+          <p className="text-olive text-lg max-w-3xl mx-auto leading-relaxed">
+            16 well-furnished deluxe double rooms, cottage-type with independent sit-outs in a village setting
+            located in the midst of evergreen forest. Air conditioners provided in all rooms for your comfort.
+          </p>
+        </motion.div>
+
+        {/* Season Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
+          transition={{ duration: 0.8, delay: 0.25 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 max-w-4xl mx-auto"
+        >
+          <div className="bg-sand-light/30 rounded-2xl p-6 border-2 border-forest/10">
+            <div className="flex items-center space-x-3 mb-3">
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-forest/10">
+                <i className="ri-calendar-line text-forest text-xl"></i>
+              </div>
+              <h3 className="font-sans font-semibold text-forest-dark text-lg">Regular Season</h3>
+            </div>
+            <p className="text-olive text-sm">
+              15th September 2026 â€“ 31st May 2027<br />
+              <span className="text-xs">(Excluding peak season dates)</span>
+            </p>
+          </div>
+
+          <div className="bg-gold/10 rounded-2xl p-6 border-2 border-gold/30">
+            <div className="flex items-center space-x-3 mb-3">
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gold/20">
+                <i className="ri-star-line text-gold text-xl"></i>
+              </div>
+              <h3 className="font-sans font-semibold text-forest-dark text-lg">Peak Season</h3>
+            </div>
+            <p className="text-olive text-sm">
+              16th December 2026 â€“ 5th January 2027<br />
+              <span className="text-xs font-medium text-gold">(Minimum 2 nights stay required)</span>
+            </p>
           </div>
         </motion.div>
 
