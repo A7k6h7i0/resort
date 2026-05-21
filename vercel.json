@@ -51,6 +51,14 @@
       "destination": "/blog.html"
     },
     {
+      "source": "/blog-baratang-guide",
+      "destination": "/blog-baratang-guide.html"
+    },
+    {
+      "source": "/blog-family-escape",
+      "destination": "/blog-family-escape.html"
+    },
+    {
       "source": "/contact",
       "destination": "/contact.html"
     },
@@ -79,7 +87,7 @@
       "destination": "/privacy-policy.html"
     },
     {
-      "source": "/((?!assets/|images/|favicon.ico|robots.txt|static-page.js|.*\\.html$).*)",
+      "source": "/((?!assets/|images/|favicon.ico|robots.txt|sitemap.xml|static-page.js|.*\\.html$).*)",
       "destination": "/index.html"
     }
   ]
