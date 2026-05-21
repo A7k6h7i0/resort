@@ -81,7 +81,7 @@ const RoomTariff = () => {
               <h3 className="font-sans font-semibold text-forest-dark text-lg">Regular Season</h3>
             </div>
             <p className="text-olive text-sm">
-              15th September 2024 – 31st May 2025<br />
+              15th September 2026 – 31st May 2027<br />
               <span className="text-xs">(Excluding peak season dates)</span>
             </p>
           </div>
@@ -94,7 +94,7 @@ const RoomTariff = () => {
               <h3 className="font-sans font-semibold text-forest-dark text-lg">Peak Season</h3>
             </div>
             <p className="text-olive text-sm">
-              16th December 2024 – 5th January 2025<br />
+              16th December 2026 – 5th January 2027<br />
               <span className="text-xs font-medium text-gold">(Minimum 2 nights stay required)</span>
             </p>
           </div>
