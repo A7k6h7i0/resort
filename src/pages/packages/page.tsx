@@ -48,12 +48,9 @@ const PackagesPage = () => {
       <Navbar />
       <HeroSection />
 
-      {/* ✅ MakeMyTrip-style cards */}
-      <RoomTariff />
       <PackageGrid />
       <OtherIslandPackageGrid />
-      
-      
+      <RoomTariff />
       <Facilities />
       <Footer />
     </Suspense>
